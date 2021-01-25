@@ -1,22 +1,24 @@
 require_relative '../../db/connection'
 
 class Person
-  attr_reader :name, :age
+  attr_reader :id
+  attr_accessor :name, :age
+
   @@connection = Connection.new
-  COLUMNS = [:name, :age]
 
   def self.all
     group = []
     people = []
-    @@connection.db.execute "select * from person" do |row|
+    @@connection.db.execute2 "select * from people" do |row|
       group << row
     end
+    columns = group.shift
 
     group.each do |row|
       attributes = {}
 
       row.each_with_index do |value, index|
-        attributes[COLUMNS[index]] = value
+        attributes[columns[index].to_sym] = value
       end
 
       people << Person.new(attributes)
@@ -33,11 +35,27 @@ class Person
   end
 
   def initialize(options = {})
+    @id = options[:id]
     @name = options[:name]
     @age = options[:age]
   end
 
-  def update
+  def update(options = {})
+    set = "SET "
+    options.each do |key, value|
+      set << "#{key} = '#{value}',"
+
+      self.method(key.to_s + "=").call(value)
+    end
+
+    set.chop!
+
+    sql = "UPDATE people #{set} WHERE id = #{id}"
+    puts sql
+
+    @@connection.db.execute(sql)
+
+    self
   end
 
   def destroy
@@ -49,8 +67,12 @@ end
 
 people = Person.all
 
-people.first.update(name: 'carlos')
+ person = people.first
 
-people.first.show
+puts person.update(name: 'Carlos', age: 32).inspect
 
-people.first.destroy
+# people.first.update(name: 'carlos')
+
+# people.first.show
+
+# people.first.destroy
