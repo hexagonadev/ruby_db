@@ -1,4 +1,4 @@
-require "ruby_db/version"
+require "ruby_activerecord_class/version"
 
 module RubyDb
   class Error < StandardError; end

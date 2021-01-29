@@ -1,7 +1,7 @@
-require_relative 'lib/ruby_db/version'
+require_relative 'lib/ruby_activerecord_class/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "ruby_db"
+  spec.name          = "ruby_activerecord_class"
   spec.version       = RubyDb::VERSION
   spec.authors       = ["Carlos Torrealba"]
   spec.email         = ["calrrox@gmail.com"]
