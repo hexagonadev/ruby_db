@@ -30,8 +30,25 @@ class Person
     []
   end
 
-  def self.create
-    []
+  def self.find(id)
+    @@connection.db.execute "SELECT * FROM people WHERE id = #{id} " do |row|
+      p row
+    end
+  end
+
+  def self.create(options = {})
+    column_list = ""
+    values_list = ""
+
+    options.each do |key, value|
+      column_list << " #{key},"
+      values_list << " '#{value}',"
+    end
+    column_list.chop!
+    values_list.chop!
+
+    @@connection.db.execute2 "INSERT INTO people (#{column_list}) VALUES (#{values_list})"
+
   end
 
   def initialize(options = {})
@@ -50,29 +67,36 @@ class Person
 
     set.chop!
 
-    sql = "UPDATE people #{set} WHERE id = #{id}"
+    sql = "UPDATE people #{set} WHERE id = #{@id}"
     puts sql
 
-    @@connection.db.execute(sql)
+    p @@connection.db.execute(sql).result
 
     self
   end
 
   def destroy
+    sql = "DELETE FROM people WHERE id = #{@id}"
+    @@connection.db.execute(sql)
+    self
   end
 
   def show
+    puts "Registro num. #{id} :
+          NOMBRE #{name}, EDAD: #{age}"
+
   end
 end
 
-people = Person.all
+# people = Person.all
+# # p people
 
- person = people.first
+# person = people.first
 
-puts person.update(name: 'Carlos', age: 32).inspect
+# person.update(name: 'Nathaly', age: 28)
 
-# people.first.update(name: 'carlos')
+# # people.first.update(name: 'carlos')
 
-# people.first.show
+# # people.first.show
 
-# people.first.destroy
+# # people.first.destroy
