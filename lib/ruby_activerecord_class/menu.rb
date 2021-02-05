@@ -6,6 +6,8 @@ require_relative  'appointments'
 class Menu
   def self.show
 
+  end
+
   def initialize
     @input = gets.chomp
 
@@ -22,15 +24,7 @@ class Menu
   end
 
   def create_user(email)
-    user = User.create(email: "#{email}")
-    add_vehicle(user.id)
-    puts '¿Quieres agendar una cita?'
-    @input
-    if @input == "si"
-      create_appointment
-    else
-
-    end
+    user = User.create(email: email)
     self
   end
 
@@ -48,9 +42,9 @@ class Menu
      color = gets.chomp
      puts 'Placa:'
      vin = gets.chomp
-     user_id = user
 
-     Vehicle.create(brand: brand, model: model, engine_size: engine_size, year: year, color: color, vin: vin, user_id: user_id)
+
+     Vehicle.create(brand: brand, model: model, engine_size: engine_size, year: year, color: color, vin: vin, user_id: user.id)
      self
   end
 
@@ -58,14 +52,6 @@ class Menu
     puts 'Por favor ingresa tu usuario'
     user = gets.chomp
     find_user = User.find_by(email: user)
-    puts "¿Es #{find_user.email} tu usuario?"
-    @input
-    if @input == "si"
-      create_appointment(find_user.id)
-    else
-      puts 'ingrese su usuario'
-      user_1 = gets.chomp
-      find_user_1 = User.find_by(email: user)
 
   end
 
