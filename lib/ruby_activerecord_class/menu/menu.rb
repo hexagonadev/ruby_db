@@ -40,7 +40,7 @@ class Menu
   def generate_options
     [
       Option.new(1, "Crear Usuario", SignUp.new),
-      Option.new(2, "Crear Vehiculo", RegisterVehicle.new),
+      Option.new(2, "Registrar Vehiculo", RegisterVehicle.new),
       Option.new(3, "Crear Cita", MakeAppointment.new)
     ]
   end
