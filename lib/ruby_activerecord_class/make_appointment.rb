@@ -1,3 +1,6 @@
+require_relative "../appointment"
+require_relative "../user"
+require_relative "../vehicle"
 
 class MakeAppointment
   puts "Ingrese su email"

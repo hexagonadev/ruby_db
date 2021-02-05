@@ -1,35 +1,48 @@
-class Menu< ActiveRecord::Base
+require_relative "sign_up"
+require_relative "register_vehicle"
+require_relative "make_appointment"
 
-  def self.principal
-    option = Menu.new
+class Option
+  attr_reader :value, :text, :action
 
-
-    if option.selection == '1'
-
-      option.create_user
-
-      option.create_appointment if option.selection == '2'
-    end
-
-
-    system('clear')
+  def initialize(value, text,action)
+    @text = text
+    @value = value
+    @action = action
   end
+
+  def showrequire_relative
+    "#{@value}: #{@text}"
+  end
+
+end
+
+class Menu
+  attr_accessor :input
+  attr_reader :options
 
   def initialize
-    @input
+    @options = generate_options
   end
 
-  def create_user
-    User.find_or_create_by(mail_address: "#{@input}")
-
+  def choose
+    @input = gets.chomp.to_i
   end
 
-  def create_appointment
-
+  def show
+    @options.each do |option|
+     puts option.show
+    end
   end
 
-  def selection
-    @input = gets.chomp
+  private
+
+  def generate_options
+    [
+      Option.new(1, "Crear Usuario", SignUp.new),
+      Option.new(2, "Crear Vehiculo", RegisterVehicle.new),
+      Option.new(3, "Crear Cita", MakeAppointment.new)
+    ]
   end
 
 end
