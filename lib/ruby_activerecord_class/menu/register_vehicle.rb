@@ -10,7 +10,7 @@ class RegisterVehicle
     puts "Usuario (email):"
     email = gets.chomp
     puts "Tipo de Vehiculo"
-    kind = gets.chomp.to_i
+    kind = gets.chomp
     puts "Marca:"
     brand = gets.chomp
     puts "Modelo:"
@@ -26,7 +26,7 @@ class RegisterVehicle
 
     user = User.find_by(email: email)
 
-    vehicle = Vehicle.create(brand: "#{brand}", model: "#{model}", engine_size: "#{engine_size}", year: year, color: "#{color}", vin: "#{vin}", kind: kind, user_id: user.id)
+    vehicle = Vehicle.create(brand: "#{brand}", model: "#{model}", engine_size: "#{engine_size}", year: year, color: "#{color}", vin: "#{vin}", kind: "#{kind}", user_id: user.id)
 
     puts ""
     puts "¡Vehiculo registrado con exito!"
