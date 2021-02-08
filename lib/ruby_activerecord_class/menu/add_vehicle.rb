@@ -1,29 +1,32 @@
-require_relative "ruby_activerecord_class/vehicle"
+require_relative "../vehicle"
+require_relative "../user"
 
 class AddVehicle
 
-  def initialize
+  def add_vehicle
+    puts 'Ingresa tu usuario:'
+    email = gets.chomp
+    user = User.find_by(email: email)
 
-
-  end
-
-  def add_vehicle(user)
     puts 'Por favor indícanos los siguientes datos:
     Marca:'
-    brand = gets.chomp
+    vehicle = Vehicle.new
+    vehicle.brand = gets.chomp
     puts 'Modelo:'
-    model = gets.chomp
+    vehicle.model = gets.chomp
     puts 'Motor:'
-    engine_size = gets.chomp
+    vehicle.engine_size = gets.chomp
     puts 'Año:'
-    year = gets.chomp
+    vehicle.year = gets.chomp
     puts 'Color:'
-    color = gets.chomp
+    vehicle.color = gets.chomp
     puts 'Placa:'
-    vin = gets.chomp
+    vehicle.vin = gets.chomp
+    vehicle.user_id = user.id
 
+    vehicle.save
 
-    Vehicle.create(brand: brand, model: model, engine_size: engine_size, year: year, color: color, vin: vin, user_id: user.id)
-    self
+    puts 'Su vehículo fue registrado'
+
  end
 end

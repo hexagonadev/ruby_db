@@ -15,7 +15,6 @@ class Menu
 
   def options_menu
     puts " Bienvenido a tu mecanico de confianza
-     Porque sabemos lo valioso que es tu tiempo, puedes agendar una cita y te atenderemos cuando lo desees
 
      ¿Qué deseas hacer?
      1 = Crear un usuario

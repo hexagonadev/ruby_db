@@ -1,14 +1,16 @@
-require_relative "ruby_activerecord_class/user"
+require_relative "../user"
 
 class CreateUSer
 
-  def initialize
+  def create_user
+    puts 'Ingrese email'
+    email = gets.chomp
+    user = User.new
+    user.email = email
+    user.save
 
-  end
+    puts " Bienvenido #{email}"
 
-  def create_user(email)
-    user = User.create(email: email)
-    self
   end
 
 end
