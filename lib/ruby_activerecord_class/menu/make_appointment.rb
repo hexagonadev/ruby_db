@@ -21,7 +21,7 @@ class MakeAppointment
    user = User.find_by(email: email)
    vehicle = Vehicle.find_by(vin: vin)
 
-    appointment = Appointment.create(description: "#{description}", appointment_date: date, vehicle_id: vehicle.id, user_id: user.id)
+    appointment = Appointment.create(description: description, appointment_date: date, vehicle_id: vehicle.id, user_id: user.id)
 
     puts ""
     puts "¡Su cita esta agendada para la fecha: #{date}!"

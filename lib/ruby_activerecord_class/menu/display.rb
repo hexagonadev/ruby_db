@@ -8,7 +8,7 @@ module  Display
     while found do
       puts ""
       puts "¡Bienvenido a tu mecanico favorito!"
-      puts""
+      puts ""
       menu.show
       menu.choose
       result = menu.options.select { |option| option.value == menu.input }

@@ -6,4 +6,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :roles
   has_one :profile
 
+  validates :email, presence: true
+  validates :email, uniqueness: true
+
 end
