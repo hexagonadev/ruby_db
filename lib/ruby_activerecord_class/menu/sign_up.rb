@@ -2,19 +2,26 @@ require_relative "../user"
 
 class SignUp
 
+  def initialize
+    @user = User.new
+  end
 
   def start
-    user = User.new
-    puts "Ingrese su email:"
-    user.email = gets.chomp
+    found = true
 
-    if user.save
-      puts ""
-      puts "Bienvenid@, usuario creado con exito
-            ¿Quiere registar su vehiculo? SI: 1 / NO: 2"
-    else
-      user.errors.full_message
-     "¿Desea volver al menu? SI: 1 / NO: 2"
+    while found do
+      puts "Ingrese su email:"
+      @user.email = gets.chomp
+
+      if @user.save
+        puts ""
+        puts "Bienvenid@, usuario creado con exito
+              ¿Quiere registar su vehiculo? SI: 1 / NO: 2"
+        found = flase
+      else
+        @user.errors.full_messages.each {|message| puts message}
+        puts ""
+      end
     end
   end
 end

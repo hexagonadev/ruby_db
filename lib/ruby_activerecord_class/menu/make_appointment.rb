@@ -5,23 +5,29 @@ require_relative "../vehicle"
 
 class MakeAppointment
 
+  def initialize
+    @appointment = Appointment.new
+  end
+
   def start
    puts "Ingrese los siguientes datos para su agendar su cita:"
    puts ""
 
    puts "Usuario (email):"
    email = gets.chomp
+   user = User.find_by(email: email)
+
    puts "Indique el motivo de la cita"
-   description = gets.chomp
+   @appointment.description = gets.chomp
    puts "Indique la fecha para la cita (dd/mm/aa)"
-   date = gets.chomp
+   @appointment.date = gets.chomp
+
+
    puts "Indique la placa de su Vehiculo"
    vin = gets.chomp
-
-   user = User.find_by(email: email)
    vehicle = Vehicle.find_by(vin: vin)
 
-    appointment = Appointment.create(description: description, appointment_date: date, vehicle_id: vehicle.id, user_id: user.id)
+    #appointment = Appointment.create(description: description, appointment_date: date, vehicle_id: vehicle.id, user_id: user.id)
 
     puts ""
     puts "¡Su cita esta agendada para la fecha: #{date}!"
