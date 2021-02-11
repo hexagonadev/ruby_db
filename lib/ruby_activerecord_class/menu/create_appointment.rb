@@ -22,9 +22,12 @@ class CreateAppointment
     vehicle = Vehicle.find_by(vin: vin)
     appointment.vehicle_id = vehicle.id
 
+
+
+
     appointment.save
 
     puts 'Cita agendada'
-
+    puts ""
   end
 end

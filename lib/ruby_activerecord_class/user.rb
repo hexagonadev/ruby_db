@@ -5,5 +5,6 @@ class User < ActiveRecord::Base
   has_many :appointments
   has_and_belongs_to_many :roles
   has_one :profile
+  validates :email, uniqueness: true
 
 end

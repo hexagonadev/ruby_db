@@ -7,10 +7,12 @@ class AddVehicle
     puts 'Ingresa tu usuario:'
     email = gets.chomp
     user = User.find_by(email: email)
+    if user.valid?
 
     puts 'Por favor indícanos los siguientes datos:
     Marca:'
     vehicle = Vehicle.new
+    vehicle.user_id = user.id
     vehicle.brand = gets.chomp
     puts 'Modelo:'
     vehicle.model = gets.chomp
@@ -22,11 +24,18 @@ class AddVehicle
     vehicle.color = gets.chomp
     puts 'Placa:'
     vehicle.vin = gets.chomp
-    vehicle.user_id = user.id
 
-    vehicle.save
 
-    puts 'Su vehículo fue registrado'
-
+    loop do
+    if vehicle.save
+      puts 'Su vehículo fue registrado'
+      raise StopIteration
+    else
+      puts vehicle.errors.full_messages
+      puts 'Placa:'
+      vehicle.vin = gets.chomp
+    end
+    end
  end
+
 end
