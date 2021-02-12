@@ -2,11 +2,10 @@ require_relative "../user"
 
 class SignUp
 
-  def initialize
-    @user = User.new
-  end
-
   def start
+
+    user = User.new
+
     found = true
 
     while found do
@@ -17,7 +16,7 @@ class SignUp
         puts ""
         puts "Bienvenid@, usuario creado con exito
               ¿Quiere registar su vehiculo? SI: 1 / NO: 2"
-        found = flase
+        found = false
       else
         @user.errors.full_messages.each {|message| puts message}
         puts ""
