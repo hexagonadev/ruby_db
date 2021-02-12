@@ -11,7 +11,7 @@ class RegisterVehicle
     while found do
       puts "Registro de Vehiculo:"
       puts ""
-      user_valid(vehicle)
+      user_valid(vehicle) if vehicle.user_id.nil?
       vehicle_dates(vehicle)
 
       if vehicle.save
