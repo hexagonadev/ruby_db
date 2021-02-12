@@ -10,15 +10,15 @@ class SignUp
 
     while found do
       puts "Ingrese su email:"
-      @user.email = gets.chomp
+      user.email = gets.chomp
 
-      if @user.save
+      if user.save
         puts ""
         puts "Bienvenid@, usuario creado con exito
               ¿Quiere registar su vehiculo? SI: 1 / NO: 2"
         found = false
       else
-        @user.errors.full_messages.each {|message| puts message}
+        user.errors.full_messages.each {|message| puts message}
         puts ""
       end
     end
